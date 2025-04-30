@@ -98,7 +98,7 @@ public class DaemonExample {
 ### 3. A shorter way to create threads
 
 ```java  
-public class LambdaThreadDemo {  
+public class ThreadDemo {  
     public static void main(String[] args) {  
         Thread thread = new Thread(() -> {  
             System.out.println("Thread is running using a lambda!");  
