@@ -180,7 +180,7 @@ Your work on this assignment will be evaluated based on:
 
 - **Understanding of Multithreading Concepts**: Your ability to accurately answer the theoretical questions, demonstrating a deep understanding of multithreading in Java. Remember that the answers to the theoretical questions should be provided separately in a markdown file.
 
-- **Test Cases**: Your code should pass all the tests provided in the test directory. Make sure to enable GitHub Actions to run the tests on GitHub.
+- **Test Cases**: Your code should pass all the tests provided in the test directory.
 
 - **Code Quality**: Your code should be well-structured, readable, and efficient. Proper use of Java conventions, including variable naming, class structure, and comments, will also be considered.
   Total: 100 points
