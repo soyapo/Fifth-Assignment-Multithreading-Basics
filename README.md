@@ -132,14 +132,14 @@ The application will display words to the user one at a time, with a set timeout
   - Show the total number of correct and incorrect words.
   - Show the total time taken.
   - Show the average time per word.
-- Timeout duration is not constant. You must calculate the timeout dynamically, for example: Based on the length of the word.
+- The timeout duration is not fixed. You must calculate it dynamically — for example, based on the length of the word.
 
 ---
 
 ### Report Generator
 
 #### Task Description
-This Java project reads and processes multiple order files concurrently using multithreading. Each thread analyzes one file, calculates statistics such as total cost, number of products purchased, average discount, and identifies the most expensive purchase after discount. Product data is preloaded from a shared catalog. The goal is to demonstrate efficient file processing using threads while safely accessing shared resources.
+This Java project reads and processes multiple order files concurrently using multithreading. Each thread analyzes one file, calculates statistics such as total cost, number of products purchased, average discount, and identifies the most expensive purchase after discount. Product data is preloaded from a shared catalog. The goal is to demonstrate efficient file processing using threads.
 
 #### 🛠 What  You  Need to Do
 
