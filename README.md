@@ -116,8 +116,6 @@ public class LambdaThreadDemo {
 
 - How is this code different from creating a class that extends `Thread` or implements `Runnable`?
 
-- What are the benefits of using a lambda expression for threads?
-
 
 ## Practical Questions 💻
 
