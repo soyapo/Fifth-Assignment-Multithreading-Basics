@@ -178,7 +178,9 @@ Your work on this assignment will be evaluated based on:
 - **Understanding of Multithreading Concepts**: Your ability to accurately answer the theoretical questions, and demonstrating a deep understanding of multithreading in Java. Remember that the answers to the theoretical questions should be provided separately in a markdown file.
 
 - **Code Quality**: Your code should be well-structured, readable, and efficient. Proper use of Java conventions, including variable naming, class structure, and comments, will also be considered.
-  
+
+- You **must not** use advanced multithreading tools (such as ExecutorService, CompletableFuture, or others)
+
 - Total: 100 points
   - 🧠 Theoretical Questions – 30 points
   - 💻 Practical Task 1 (Typing Test) – 35 points
