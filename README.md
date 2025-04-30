@@ -14,20 +14,47 @@ Before diving into this project, make sure you have the following tools and know
 - **Git** : Install Git, a powerful version control system, from [Git's official website](https://git-scm.com/downloads).
 - **Gradle** : Utilize Gradle (recommended version 7.6 or newer) as the build tool. You can find installation instructions [here](https://gradle.org/install/).
 
-### Knowledge Required:
 
 ## Objectives 🎯
 
-## Tasks 📝
+## Theoretical Questions 📝
 
-1. **Set Up the Project:**
+## Practical Questions 💻
 
-   - Start by cloning the repository to your local machine.
-   - Open the project in an IDE such as IntelliJ.
+### Typing Test
+#### Task Description
+1.  Show words to the user one at a time, and set a timeout  for each word.
 
-2.
+2.  If the user does not type the word within the timeout, the chance is lost and the app moves to the next word.
 
-## Bonus Objectives (For Advanced Users) 🌟
+3.  Input must be available at all times — the timeout should not wait  for the user to enter something.
+
+4.  If the user types a word correctly or incorrectly before timeout, the program must immediately show the result and move to the next word, ignoring any remaining time.
+
+#### 🛠 What  You  Need to Do
+
+- You can change the provided code  if you have your own solution.
+- However, it is recommended to keep the current structure for consistency and guidance.
+- Currently, some test words are hardcoded; instead, you must:
+  - Read words from the provided file containing 100 words.
+  - Each time, randomly select words from this list for testing.
+- After the test is completed:
+  - Show the total number of correct and incorrect words.
+  - Show the total time taken.
+  - Show the average time per word.
+-  Timeout duration is not constant. 
+  - You must calculate the timeout dynamically, for example:
+    - Based on the length of the word,
+    - Or using any logic you choose.
+
+
+
+
+---
+
+
+
+## Bonus Objectives🌟
 
 ## Notes 📝
 
