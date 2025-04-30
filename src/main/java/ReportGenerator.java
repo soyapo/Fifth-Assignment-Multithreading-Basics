@@ -22,11 +22,20 @@ public class ReportGenerator {
 
         @Override
         public void run() {
-
+            //TODO:
+            // - Read all lines from the input file (path)
+            // - For each line, parse product ID, amount, and discount
+            // - Find the corresponding product from catalog
+            // - Calculate discounted cost and update total stats (totalAmount, totalCost, totalDiscountSum, totalLines)
+            // - Track the most expensive purchase after discount
         }
 
         public void makeReport() {
-
+            // TODO:
+            // - Print the filename
+            // - Print total cost and total items bought
+            // - Calculate and print average discount
+            // - Display info about the most expensive purchase after discount
         }
     }
 
@@ -54,17 +63,23 @@ public class ReportGenerator {
         }
     }
     private static final String[] ORDER_FILES = {
-            //TODO: Add paths to order files
+            // TODO: Define the paths to the order details text files
     };
 
     static Product[] productCatalog = new Product[10];
-    static TaskRunnable[] tasks = new TaskRunnable[4];
 
     public static void loadProducts() throws IOException {
-        //TODO: Read products from Products.txt with a single thread and store them in the productCatalog array
+        // TODO:
+        // - Read lines from Products.txt
+        // - For each line, parse product ID, name, and price
+        // - Store Product objects in the productCatalog array
     }
 
     public static void main(String[] args) throws InterruptedException {
-        //TODO: Use four threads
+        // TODO:
+        // - Create one TaskRunnable and Thread for each order file
+        // - Start all threads
+        // - Wait for all threads to finish
+        // - After all threads are done, call makeReport() on each TaskRunnable
     }
 }
