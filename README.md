@@ -48,12 +48,13 @@ public class StartVsRun {
         Thread t2 = new Thread(new MyRunnable(), "Thread-2");    
         System.out.println("Calling start()");    
         t2.start();    
-}  }  
+    }  
+}  
 ```  
 
 **Questions:**
 
-- What output do you get from the program?
+- What output do you get from the program? Why?
 
 - What’s the difference in behavior between calling `start()` and `run()`?
 
@@ -70,8 +71,9 @@ public class DaemonExample {
                 try {    
                     Thread.sleep(500);    
                 } catch (InterruptedException e) {    
-                 //Handling Exception  
-                }            }    
+                 //[Handling Exception...]  
+                }            
+            }    
         }    
     }    
     public static void main(String[] args) {    
@@ -79,11 +81,12 @@ public class DaemonExample {
         thread.setDaemon(true);    
         thread.start();    
         System.out.println("Main thread ends.");    
-}  }  
+    }  
+}  
 ```  
 
 **Questions:**
-- What output do you get from the program?
+- What output do you get from the program? Why?
 
 - What happens if you remove `thread.setDaemon(true)`?
 
@@ -115,8 +118,6 @@ public class LambdaThreadDemo {
 
 - What are the benefits of using a lambda expression for threads?
 
-- Try rewriting this example **without using a lambda** — what changes?
-
 
 ## Practical Questions 💻
 
@@ -133,9 +134,7 @@ The application will display words to the user one at a time, with a set timeout
   - Show the total number of correct and incorrect words.
   - Show the total time taken.
   - Show the average time per word.
-  -  Timeout duration is not constant. You must calculate the timeout dynamically, for example:
-  - Based on the length of the word,
-  - Or using any logic you choose.
+- Timeout duration is not constant. You must calculate the timeout dynamically, for example: Based on the length of the word.
 
 ---
 
@@ -150,11 +149,11 @@ This Java project reads and processes multiple order files concurrently using mu
 - Create a thread (TaskRunnable) for each order file (4 threads) to:
   - Read and parse the file line by line.
   - Accumulate statistics (total cost, total items, average discount, most expensive purchase).
-  - **Note that decimal values should be shown with 2 decimal points**
+  - **Note that decimal values should be displayed with two decimal places.**
 - Use multithreading to process multiple order files in parallel.
 - Generate a report for each file, showing:
   - Total cost  (2 decimal points)
-  - Total items bought  (2 decimal points)
+  - Total items bought 
   - Average discount  (2 decimal points)
   - Most expensive purchase after discount
 ---  
@@ -171,17 +170,17 @@ This Java project reads and processes multiple order files concurrently using mu
     - Dynamic Timeout: Adjust the timeout for the next word depending on the user's skill.
 - Report Generator
   - Data Analysis and Graphs (UI):
-    - Sales Over Time: Use line graphs to show how sales have fluctuated over a given time period (e.g., weekly or monthly).
+    - Sales Over Time: Use line graphs to show how sales have fluctuated over the years
 
 
-## Evaluation⚖️
+## Evaluation ⚖️
 
 Your work on this assignment will be evaluated based on:
 
-- **Understanding of Multithreading Concepts**: Your ability to accurately answer the theoretical questions, demonstrating a deep understanding of multithreading in Java. Remember that the answers to the theoretical questions should be provided separately in a markdown file.
+- **Understanding of Multithreading Concepts**: Your ability to accurately answer the theoretical questions, and demonstrating a deep understanding of multithreading in Java. Remember that the answers to the theoretical questions should be provided separately in a markdown file.
 
 - **Code Quality**: Your code should be well-structured, readable, and efficient. Proper use of Java conventions, including variable naming, class structure, and comments, will also be considered.
-  Total: 100 points
+  
 - Total: 100 points
   - 🧠 Theoretical Questions – 30 points
   - 💻 Practical Task 1 (Typing Test) – 35 points
