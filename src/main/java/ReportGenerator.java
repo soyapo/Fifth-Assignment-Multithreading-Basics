@@ -25,6 +25,8 @@ public class ReportGenerator {
             //TODO:
             // - Read all lines from the input file (path)
             // - For each line, parse product ID, amount, and discount
+            // - The format of the files are like this:
+            //      [productId],[amount],[discountAmount]
             // - Find the corresponding product from catalog
             // - Calculate discounted cost and update total stats (totalAmount, totalCost, totalDiscountSum, totalLines)
             // - Track the most expensive purchase after discount
@@ -63,7 +65,7 @@ public class ReportGenerator {
         }
     }
     private static final String[] ORDER_FILES = {
-            // TODO: Define the paths to the order details text files
+            // TODO: Define the paths to the order detail text files in the resources folder
     };
 
     static Product[] productCatalog = new Product[10];
@@ -72,6 +74,8 @@ public class ReportGenerator {
         // TODO:
         // - Read lines from Products.txt
         // - For each line, parse product ID, name, and price
+        // - The format of the file is like this:
+        //      [productId],[name],[price]
         // - Store Product objects in the productCatalog array
     }
 
