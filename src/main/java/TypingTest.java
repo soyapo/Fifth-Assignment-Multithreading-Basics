@@ -4,19 +4,24 @@ import java.util.Scanner;
 
 public class TypingTest {
 
-    private static volatile String lastInput = "";
+    private static String lastInput = "";
     private static Scanner scanner = new Scanner(System.in);
-    public static Thread timeoutThread;
-    public static Thread inputThread = new Thread(() -> {
-        // TODO: Write a thread here to get input without stopping other thread functionalities
-    });
+    public static class InputRunnable implements Runnable {
+
+        //TODO: Implement a thread to get user input without blocking the main thread
+        @Override
+        public void run() {
+
+        }
+    }
+
 
     public static void testWord(String wordToTest) {
         try {
             System.out.println(wordToTest);
             lastInput = "";
 
-            // TODO: Use threads here to get input and set a timer concurrently
+            // TODO
 
             System.out.println();
             System.out.println("You typed: " + lastInput);
@@ -32,14 +37,14 @@ public class TypingTest {
     }
 
     public static void typingTest(List<String> inputList) throws InterruptedException {
-        // Hint: Start the input thread here
+
         for (int i = 0; i < inputList.size(); i++) {
             String wordToTest = inputList.get(i);
             testWord(wordToTest);
-            Thread.sleep(2000); // Some time before proceeding to the next word
+            Thread.sleep(2000); // Pause briefly before showing the next word
         }
 
-        // TODO: Show test results here
+        // TODO: Display a summary of test results
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -50,8 +55,9 @@ public class TypingTest {
         words.add("is a");
         words.add("crime");
 
-        // TODO: Replace hard-coded words with words read from a given file
+        // TODO: Replace the hardcoded word list with words read from the given file in the resources
         typingTest(words);
 
         System.out.println("Press Enter to exit.");
     }
+}
