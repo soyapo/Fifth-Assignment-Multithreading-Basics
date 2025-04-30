@@ -1,40 +1,131 @@
-# Fifth Assignment: Multithreading Basics 🎮
+# Fifth Assignment: Multithreading Basics
+
+## Table of contents
+- [Introduction](#introduction)
+- [Objectives 🎯](#objectives-)
+- [Theoretical Questions 📝](#theoretical-questions-)
+- [Practical Questions 💻](#practical-questions-)
+- [Bonus Tasks 🌟](#bonus-tasks-)
+- [Evaluation ⚖️](#evaluation-)
+- [Submission ⌛](#submission-)
+- [Additional Resources 📚](#additional-resources-)
 
 ## Introduction
+Welcome to your Fifth Advanced Programming (AP) Assignment. This project is divided into two main sections:
 
-## Why Learn ? 📊
+1. **Theoretical Questions**: This section is designed to deepen your understanding of key multithreading concepts in Java. You'll have to analyze three code blocks and answer questions about them.
 
-## Prerequisites ✅
-
-Before diving into this project, make sure you have the following tools and knowledge:
-
-### Tools Needed:
-
-- **Java 17 or higher** : Download the latest version from [Oracle's Java website](https://www.oracle.com/java/technologies/downloads/).
-- **Git** : Install Git, a powerful version control system, from [Git's official website](https://git-scm.com/downloads).
-- **Gradle** : Utilize Gradle (recommended version 7.6 or newer) as the build tool. You can find installation instructions [here](https://gradle.org/install/).
+2. **Practical Questions**: In this section, you'll get hands-on experience with multithreading in Java. Your code will be manually checked to ensure you've implemented the tasks using multithreading.
 
 
 ## Objectives 🎯
 
+By completing this assignment, you will:
+
+- Deepen your understanding of **multithreading** in Java and apply the concepts effectively.
+- Gain familiarity with key multithreading concepts.
+
+Note that while this assignment covers many important aspects of multithreading, there are some advanced topics such as race condition and synchronization that won't be covered in this assignment and will be introduced in the following week. However, a solid understanding of the concepts covered in this assignment is crucial for grasping those advanced topics.
+
 ## Theoretical Questions 📝
+**Note: Please answer these questions in a Markdown file and place it in the root directory of your fork. Include code or screenshots where you see fit.**
+
+### 1. `start()` vs `run()`
+
+```java  
+public class StartVsRun {    
+    static class MyRunnable implements Runnable {    
+        public void run() {    
+            System.out.println("Running in: " + Thread.currentThread().getName()); 
+        }    
+    }    
+    public static void main(String[] args) throws InterruptedException {    
+        Thread t1 = new Thread(new MyRunnable(), "Thread-1");    
+        System.out.println("Calling run()");    
+        t1.run();    
+        Thread.sleep(100);    
+    
+        Thread t2 = new Thread(new MyRunnable(), "Thread-2");    
+        System.out.println("Calling start()");    
+        t2.start();    
+}  }  
+```  
+
+**Questions:**
+
+- What output do you get from the program?
+
+- What’s the difference in behavior between calling `start()` and `run()`?
+
+---  
+
+### 2. Daemon Threads
+
+```java  
+public class DaemonExample {    
+    static class DaemonRunnable implements Runnable {    
+        public void run() {    
+            for(int i = 0; i < 20; i++) {    
+                System.out.println("Daemon thread running...");    
+                try {    
+                    Thread.sleep(500);    
+                } catch (InterruptedException e) {    
+                 //Handling Exception  
+                }            }    
+        }    
+    }    
+    public static void main(String[] args) {    
+        Thread thread = new Thread(new DaemonRunnable());    
+        thread.setDaemon(true);    
+        thread.start();    
+        System.out.println("Main thread ends.");    
+}  }  
+```  
+
+**Questions:**
+- What output do you get from the program?
+
+- What happens if you remove `thread.setDaemon(true)`?
+
+- What are some real-life use cases of daemon threads?
+
+  
+---  
+
+### 3. A shorter way to create threads
+
+```java  
+public class LambdaThreadDemo {  
+    public static void main(String[] args) {  
+        Thread thread = new Thread(() -> {  
+            System.out.println("Thread is running using a lambda!");  
+        });  
+  
+        thread.start();  
+    }  
+}   
+```  
+
+**Questions:**
+- What output do you get from the program?
+
+- What is the `() -> { ... }` syntax called?
+
+- How is this code different from creating a class that extends `Thread` or implements `Runnable`?
+
+- What are the benefits of using a lambda expression for threads?
+
+- Try rewriting this example **without using a lambda** — what changes?
+
 
 ## Practical Questions 💻
 
 ### Typing Test
 #### Task Description
-1.  Show words to the user one at a time, and set a timeout for each word.
-
-2.  If the user does not type the word within the timeout, the chance is lost and the app moves to the next word.
-
-3.  Input must be available at all times — the timeout should not wait for the user to enter something.
-
-4.  If the user types a word correctly or incorrectly before timeout, the program must immediately show the result and move to the next word, ignoring any remaining time.
+The application will display words to the user one at a time, with a set timeout for each word. If the user does not type the word within the specified timeout, the opportunity is lost, and the app will automatically move on to the next word. The input field must remain available at all times, meaning the timeout will not pause for user input. If the user types the word correctly or incorrectly before the timeout expires, the program will immediately display the result and proceed to the next word, ignoring any remaining time.
 
 #### 🛠 What  You  Need to Do
 
-- You can change the provided code  if you have your own solution.
-- However, it is recommended to keep the current structure for consistency and guidance.
 - Currently, some test words are hardcoded; instead, you must:
   - Read words from the provided file containing 100 words.
   - Each time, randomly select words from this list for testing.
@@ -42,10 +133,11 @@ Before diving into this project, make sure you have the following tools and know
   - Show the total number of correct and incorrect words.
   - Show the total time taken.
   - Show the average time per word.
--  Timeout duration is not constant. 
-  - You must calculate the timeout dynamically, for example:
-    - Based on the length of the word,
-    - Or using any logic you choose.
+  -  Timeout duration is not constant. You must calculate the timeout dynamically, for example:
+  - Based on the length of the word,
+  - Or using any logic you choose.
+
+---
 
 ### Report Generator
 
@@ -55,37 +147,60 @@ This Java project reads and processes multiple order files concurrently using mu
 #### 🛠 What  You  Need to Do
 
 - Read product data from a Products.txt file and populate a shared product catalog.
-- Create a thread (TaskRunnable) for each order file to:
+- Create a thread (TaskRunnable) for each order file (4 threads) to:
   - Read and parse the file line by line.
   - Accumulate statistics (total cost, total items, average discount, most expensive purchase).
+  - **Note that decimal values should be shown with 2 decimal points**
 - Use multithreading to process multiple order files in parallel.
 - Generate a report for each file, showing:
-  - Total cost
-  - Total items bought
-  - Average discount
+  - Total cost  (2 decimal points)
+  - Total items bought  (2 decimal points)
+  - Average discount  (2 decimal points)
   - Most expensive purchase after discount
----
+---  
 
 
 
-## Bonus Objectives🌟
+## Bonus Tasks 🌟
 
-## Notes 📝
+- Typing Test
+  - User Interface (UI):
+    - Create a clean and intuitive UI that displays words to be typed and provides real-time feedback on the user's input.
+  - Adaptive Timeout Based on Skill:
+    - Measuring Skill: After each word, measure the user's typing speed (words per minute) and accuracy (correct words typed vs. total words typed).
+    - Dynamic Timeout: Adjust the timeout for the next word depending on the user's skill.
+- Report Generator
+  - Data Analysis and Graphs (UI):
+    - Sales Over Time: Use line graphs to show how sales have fluctuated over a given time period (e.g., weekly or monthly).
 
-## Evaluation 🧐
 
-## Submission 📁
+## Evaluation ⚖️
 
-To share your work:
+Your work on this assignment will be evaluated based on:
+
+- **Understanding of Multithreading Concepts**: Your ability to accurately answer the theoretical questions, demonstrating a deep understanding of multithreading in Java. Remember that the answers to the theoretical questions should be provided separately in a markdown file.
+
+- **Test Cases**: Your code should pass all the tests provided in the test directory. Make sure to enable GitHub Actions to run the tests on GitHub.
+
+- **Code Quality**: Your code should be well-structured, readable, and efficient. Proper use of Java conventions, including variable naming, class structure, and comments, will also be considered.
+
+## Submission ⌛
 
 1. Add your mentor as a contributor to the project.
 2. Create a `develop` branch for implementing features.
 3. Use Git for regular code commits.
-4. Push your code to the remote repository.
+4. Push your code and the answers file to the remote repository.
 5. Submit a pull request to merge the `develop` branch with `main`.
 
-The deadline for submitting your code is ...
+The deadline for submitting your code is **Wednesday, May 7** (17th of Ordibehesht)
 
-If you have any further questions or need clarification, do not hesitate to reach out to your mentor. Good luck with your project! 🌟
+## Additional Resources 📚
 
-## Resources 📚
+For assistance with this assignment, you may refer to the following resources:
+
+- [Java Concurrency and Multithreading](https://jenkov.com/tutorials/java-concurrency/index.html)
+- [Multithreading Benefits](https://jenkov.com/tutorials/java-concurrency/benefits.html)
+- [Concurrency vs. Parallelism](https://jenkov.com/tutorials/java-concurrency/concurrency-vs-parallelism.html)
+- [Creating and Starting Java Threads](https://jenkov.com/tutorials/java-concurrency/creating-and-starting-threads.html)
+
+Also, you can find a wealth of knowledge from various YouTube courses. They can be a great source of learning. Alongside, joining discussions on forums and reading helpful documents can also be beneficial.
