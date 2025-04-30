@@ -55,9 +55,9 @@ public class TypingTest {
         words.add("is a");
         words.add("crime");
 
-        // TODO: Replace the hardcoded word list with words read from the given file in the resources
+        // TODO: Replace the hardcoded word list with words read from the given file in the resources folder (Words.txt)
         typingTest(words);
 
-        System.out.println("Press Enter to exit.");
+        System.out.println("Press enter to exit.");
     }
 }
