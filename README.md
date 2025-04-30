@@ -174,7 +174,7 @@ This Java project reads and processes multiple order files concurrently using mu
     - Sales Over Time: Use line graphs to show how sales have fluctuated over a given time period (e.g., weekly or monthly).
 
 
-## Evaluation ⚖️
+## Evaluation⚖️
 
 Your work on this assignment will be evaluated based on:
 
