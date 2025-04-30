@@ -28,7 +28,7 @@ By completing this assignment, you will:
 Note that while this assignment covers many important aspects of multithreading, there are some advanced topics such as race condition and synchronization that won't be covered in this assignment and will be introduced in the following week. However, a solid understanding of the concepts covered in this assignment is crucial for grasping those advanced topics.
 
 ## Theoretical Questions 📝
-**Note: Please answer these questions in a Markdown file and place it in the root directory of your fork. Include code or screenshots where you see fit.**
+**Note: Please answer these questions in a Markdown file (Report.md) and place it in the root directory of your fork. Include code or screenshots where you see fit.**
 
 ### 1. `start()` vs `run()`
 
@@ -183,6 +183,12 @@ Your work on this assignment will be evaluated based on:
 - **Test Cases**: Your code should pass all the tests provided in the test directory. Make sure to enable GitHub Actions to run the tests on GitHub.
 
 - **Code Quality**: Your code should be well-structured, readable, and efficient. Proper use of Java conventions, including variable naming, class structure, and comments, will also be considered.
+  Total: 100 points
+- Total: 100 points
+  - 🧠 Theoretical Questions – 30 points
+  - 💻 Practical Task 1 (Typing Test) – 35 points
+  - 📊 Practical Task 2 (Report Generator) – 35 points
+  - 🌟 Bonus Tasks – Up to 10 extra points
 
 ## Submission ⌛
 
