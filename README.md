@@ -10,6 +10,26 @@
 - [Submission ⌛](#submission-)
 - [Additional Resources 📚](#additional-resources-)
 
+
+## Important Note:
+This project is configured to use a **local Gradle installation**. If you're opening this project on your own system, please make sure to:
+
+1. Go to **Settings/Preferences** > **Build, Execution, Deployment** > **Build Tools** > **Gradle**.
+
+2. Under **Gradle settings**, change the **Gradle distribution** to:
+
+  - **Use local Gradle distribution**, and
+
+  - Set the **Gradle home** path to your own local Gradle installation directory.
+
+If you don’t have Gradle installed locally, you can either:
+
+- Install Gradle manually and configure the path, or
+
+- Change the setting to **Use Gradle wrapper** instead.
+
+
+
 ## Introduction
 Welcome to your Fifth Advanced Programming (AP) Assignment. This project is divided into two main sections:
 
