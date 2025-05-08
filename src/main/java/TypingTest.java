@@ -1,92 +1,139 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.stream.Collectors;
 import java.io.IOException;
-import java.util.random.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
-public class TypingTest {
+public class ReportGenerator {
 
-    private static String lastInput = "";
-    private static Scanner cin = new Scanner(System.in);
-    private static Boolean InputRecieved = false;
+    static class Product {
+        private int productID;
+        private String productName;
+        private double price;
 
-    private static int CorrectWords = 0;
-    private static int IncorrectWords = 0;
+        public Product(int productID, String productName, double price) {
+            this.productID = productID;
+            this.productName = productName;
+            this.price = price;
+        }
 
-    public static class InputRunnable implements Runnable {
+        public int getProductID() {
+            return productID;
+        }
+
+        public String getProductName() {
+            return productName;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+    }
+
+    static class TaskRunnable implements Runnable {
+        private final String path;
+        private double totalCost;
+        private int totalAmount;
+        private int totalDiscountSum;
+        private int totalLines;
+        private Product mostExpensiveProduct;
+        private double highestCostAfterDiscount;
+
+        public TaskRunnable(String path) {
+            this.path = path;
+            this.totalCost = 0;
+            this.totalAmount = 0;
+            this.totalDiscountSum = 0;
+            this.totalLines = 0;
+            this.highestCostAfterDiscount = 0;
+            this.mostExpensiveProduct = null;
+        }
+
         @Override
         public void run() {
             try {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-                lastInput = reader.readLine();
-                InputRecieved = true;
+                List<String> lines = Files.readAllLines(Paths.get(path));
+                for (String line : lines) {
+                    String[] parts = line.split(",");
+                    int id = Integer.parseInt(parts[0]);
+                    int amount = Integer.parseInt(parts[1]);
+                    int discount = Integer.parseInt(parts[2]);
+
+                    Product product = productCatalog[id];
+                    if (product == null) continue;
+
+                    double cost = amount * product.getPrice();
+                    double discountAmount = cost * discount / 100.0;
+                    double finalCost = cost - discountAmount;
+
+                    totalCost += finalCost;
+                    totalAmount += amount;
+                    totalDiscountSum += discount;
+                    totalLines++;
+
+                    if (finalCost > highestCostAfterDiscount) {
+                        highestCostAfterDiscount = finalCost;
+                        mostExpensiveProduct = product;
+                    }
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+
+        public void makeReport() {
+            System.out.println("📄 Report for: " + path);
+            System.out.printf("Total cost: $%.2f\n", totalCost);
+            System.out.println("Total items bought: " + totalAmount);
+            double avgDiscount = totalLines == 0 ? 0 : (double) totalDiscountSum / totalLines;
+            System.out.printf("Average discount: %.2f%%\n", avgDiscount);
+            if (mostExpensiveProduct != null) {
+                System.out.printf("Most expensive purchase: %s ($%.2f after discount)\n",
+                        mostExpensiveProduct.getProductName(), highestCostAfterDiscount);
+            }
+            System.out.println();
+        }
     }
 
-    public static List<String> loadWordsFromResource() throws IOException {
-        InputStream inputStream = TypingTest.class.getResourceAsStream("/Words.txt");
-        if (inputStream == null) {
-            throw new IOException("Words.txt not found in resources.");
+    private static final String[] ORDER_FILES = {
+        "src/main/resources/Order1.txt",
+        "src/main/resources/Order2.txt",
+        "src/main/resources/Order3.txt",
+        "src/main/resources/Order4.txt"
+    };
+
+    static Product[] productCatalog = new Product[10];
+
+    public static void loadProducts() throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get("src/main/resources/Products.txt"));
+        for (String line : lines) {
+            String[] parts = line.split(",");
+            int id = Integer.parseInt(parts[0]);
+            String name = parts[1];
+            double price = Double.parseDouble(parts[2]);
+            productCatalog[id] = new Product(id, name, price);
         }
-
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-            return reader.lines().collect(Collectors.toList());
-        }
-    }
-
-    public static void testWord(String wordToTest) {
-        lastInput = "";
-        InputRecieved = false;
-
-        System.out.println("\nType the word: " + wordToTest);
-
-        int timeoutMillis = Math.max(2000, wordToTest.length() * 500);  // Minimum 2s, 500ms per character
-
-        Thread inputThread = new Thread(new InputRunnable());
-        inputThread.start();
-
-        long startTime = System.currentTimeMillis();
-        while (!InputRecieved && (System.currentTimeMillis() - startTime < timeoutMillis)) {
-            // wait
-        }
-        long duration = System.currentTimeMillis() - startTime;
-
-        //if (!InputRecieved) {
-        //    System.out.println("⏰ Time's up! No input received.");
-        //} else {
-            System.out.println("You typed: " + lastInput);
-            System.out.println((lastInput.equals(wordToTest) ? "✅ Correct" : "❌ Incorrect"));
-            if(lastInput.equals(wordToTest))
-                CorrectWords++;
-            else
-                IncorrectWords++;
-        //}
-    }
-
-    public static void typingTest(List<String> inputList) throws InterruptedException {
-        Random R = new Random();
-        for (int i = 0; i < 10; i++) {
-            Thread.sleep(2000); // Pause briefly before showing the next word
-            String wordToTest = inputList.get(R.nextInt(inputList.size()));
-            testWord(wordToTest);
-        }
-
-        // TODO: Display a summary of test results
     }
 
     public static void main(String[] args) throws InterruptedException, IOException {
-        List<String> words = loadWordsFromResource();
-        typingTest(words);
-        System.out.println("Correct words: " + CorrectWords);
-        System.out.println("Incorrect words: " + IncorrectWords);
-        System.out.println("Press enter to exit.");
+        loadProducts();
+
+        List<TaskRunnable> tasks = new ArrayList<>();
+        List<Thread> threads = new ArrayList<>();
+
+        for (String file : ORDER_FILES) {
+            TaskRunnable task = new TaskRunnable(file);
+            Thread t = new Thread(task);
+            tasks.add(task);
+            threads.add(t);
+            t.start();
+        }
+
+        for (Thread t : threads) {
+            t.join();
+        }
+
+        for (TaskRunnable task : tasks) {
+            task.makeReport();
+        }
     }
 }
